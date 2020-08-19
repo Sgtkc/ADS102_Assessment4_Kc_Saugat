@@ -24,6 +24,10 @@ void playOptions()
 	int CvC = 3;
 	int playerInput = 0;
 
+
+	cout << endl;
+	cout << endl;
+	cout << endl;
 	cout << "\t" << "  PLAYER Vs PLAYER   (1)" << endl;
 	cout << "\t" << " PLAYER Vs COMPUTER  (2)" << endl;
 	cout << "\t" << "COMPUTER Vs COMPUTER (3)" << endl;
@@ -65,7 +69,9 @@ int main()
 
 
 	while (isGameRunning != false)
-	{
+	{	
+		system("cls");
+
 		cout << endl;
 		cout << endl;
 		cout << "\t" << "  MAIN MENU " << endl;

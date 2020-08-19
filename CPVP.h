@@ -18,18 +18,19 @@ public:
 	int botRight = 3;
 
 
-	int player = 1;
+	string player1 = " ";
+	string player2 = " ";
 
-
+	char Quit = ' ';
 	char markX = 'X';
 	char markY = 'y';
-	char Q = 'q';
+	
 
 	int mat[3][3] = { {topLeft, topMid, topRight} , {midLeft,midMid, midRight} , {botLeft, botMid , botRight} };
 
 	int playerOneInput;
 	int playerTwoInput;
-
+	int userInput;
 	bool GameOver = false;
 
 
@@ -38,37 +39,64 @@ public:
 		
 		while (GameOver != true)
 		{
+			
 			system("cls");
 
 			cout << "\t" << "Multiplayer Mode" << endl;
 			cout << endl;
-			cout << "\t" << " Press Q to quit " << endl;
+			cout << endl;
+			cout << endl; 
+			cout << "Player 1 Enter Your Name" << endl;
 			cout << endl;
 			cout << endl;
 
-
-
-			displayBoard();
-
+			cin >> player1;
 
 			cout << endl;
 			cout << endl;
 			cout << endl;
-
-
-			Player1();
+			cout << "Player 2 Enter Your Name" << endl;
+			cout << endl;
+			cout << endl;
 			
-			winCondition();
-			
-			Player2();
+			cin >> player2;
 
-			winCondition();
+			cout << endl;
+			cout << endl;
+			cout << " Welcome " << player1 << " and " << player2 << endl ;
+			cout << endl;
+			cout << " Enter 1 to start Playing " << endl;
+			cout << " Enter 0 to quit anytime ";
+
+			
+		
+			cin >> userInput;
+			
+			while(userInput == 1)
+			{
+				PlayerOnePlay();
+				
+				winCondition();
+
+				PlayerTwoPlay();
+				
+				winCondition();
+			
+			}
+			
+			if (userInput == 0)
+			{
+				std::cout << " GameOver ";
+
+				GameOver = true;
+
+			}
 			
 		}
 
 		return true;
 	}
-
+	
 	void displayBoard()
 	{
 		cout << "\t" << "  " << topLeft << "  " << "|" << "  " << topMid << "  " << "|" << "  " << topRight << "  " << endl;
@@ -78,8 +106,9 @@ public:
 		cout << "\t" << "  " << botLeft << "  " << "|" << "  " << botMid << "  " << "|" << "  " << botRight << "  " << endl;
 	}
 
-	void Player1()
+	void PlayerOnePlay()
 	{ 
+		
 		system("cls");
 
 		cout << endl;
@@ -92,12 +121,16 @@ public:
 		cout << endl;
 		cout << endl;
 		
-		cout << "\t" << " Player 1 enter the numbers to mark  :  " << endl;
+		cout << "\t" << player1 << "  Enter the numbers to mark  :  " << endl;
 
 
 		cin >> playerOneInput;
 
-		if (playerOneInput == topLeft && topLeft != 11 || 0)
+		if (playerOneInput == 0)
+		{
+			GameOver = true;
+		}
+		else if (playerOneInput == topLeft && topLeft != 11 || 0)
 		{
 			topLeft = 0;
 			displayBoard();
@@ -145,14 +178,18 @@ public:
 		else
 		{
 
-			cout << "\t" << " Slot Alredy Marked " << endl;
+			cout << "\t" << " Not Available " << endl;
 
 			cout << "\t" << " Player 1 enter different numbers to mark " << endl;
 
 
 			cin >> playerOneInput;
 
-			if (playerOneInput == topLeft && topLeft != 11 || 0)
+			if (playerOneInput == 0)
+			{
+				GameOver = true;
+			}
+			else if (playerOneInput == topLeft && topLeft != 11 || 0)
 			{
 				topLeft = 0;
 				displayBoard();
@@ -200,7 +237,7 @@ public:
 			else
 			{
 
-				cout << "\t" << " Slot Alredy Marked " << endl;
+				cout << "\t" << " Not Available " << endl;
 
 
 
@@ -212,7 +249,7 @@ public:
 		
 	}
 
-	void Player2()
+	void PlayerTwoPlay()
 	{
 		system("cls");
 
@@ -226,12 +263,17 @@ public:
 		cout << endl; 
 		cout << endl;
 
-		cout << "\t" << " Player 2 enter the numbers to mark  :  " << endl;
+		cout << "\t" << player2 <<  "  Enter the numbers to mark  :  " << endl;
 		
 
 
 		cin >> playerTwoInput;
-
+		
+		if (playerTwoInput == 0)
+		{
+			cout << " Game Over";
+			GameOver = true;
+		}
 		if (playerTwoInput == topLeft && topLeft != 11 || 0)
 		{
 			topLeft = 11;
@@ -280,12 +322,18 @@ public:
 		else
 		{
 
-			cout << "\t" << " Slot Alredy Marked " << endl;
+			cout << "\t" << " Not Available " << endl;
 
 			cout << "\t" << " Player 2 enter different numbers  to mark  :  " << endl;
 			cin >> playerTwoInput;
-
-			if (playerTwoInput == topLeft && topLeft != 11 || 0)
+			
+			
+			if (playerTwoInput == 0)
+			{
+				cout << " Game Over";
+				GameOver = true;
+			}
+			else if (playerTwoInput == topLeft && topLeft != 11 || 0)
 			{
 				topLeft = 11;
 				displayBoard();
@@ -333,12 +381,12 @@ public:
 			else
 			{
 
-				cout << "\t" << " Slot Alredy Marked " << endl;
+				cout << "\t" << " Not Available " << endl;
 			}
 		}
 
 		
-
+		
 		
 
 		cout << endl;
@@ -347,7 +395,7 @@ public:
 
 	}
 
-	void winCondition()
+	bool winCondition()
 	{
 		if (topLeft == midLeft && midLeft == botLeft)
 		{
@@ -359,107 +407,110 @@ public:
 			else if( topLeft || midLeft || botLeft == 11)
 			{
 				cout << "\t" << " Player 2 won " << endl;
-				GameOver = true;
+				
 			}
-			
+			GameOver = true;
 		}
 		else if (topMid == midMid && midMid == botMid)
 		{
 			if (topMid || midMid || botMid == 0)
 			{
 				cout << "\t" << " Player 1 won " << endl;
-				GameOver = true;
+				
 			}
 			else if (topMid || midMid || botMid == 11)
 			{
 				cout << "\t" << " Player 2 won " << endl;
-				GameOver = true;
+				
 			}
-			
+			GameOver = true;
 		}
 		else if (topRight == midRight && midRight == botRight)
 		{
 			if (topRight || midRight || botRight == 0)
 			{
 				cout << "\t" << " Player 1 won " << endl;
-				GameOver = true;
+				
 			}
 			else if (topRight || midRight || botRight == 11)
 			{
 				cout << "\t" << " Player 2 won " << endl;
-				GameOver = true;
+				
 			}
-			
+			GameOver = true;
 		}
 		else if (topLeft == topMid && topMid == topRight)
 		{
 			if (topLeft || topMid || topRight == 0)
 			{
 				cout << "\t" << " Player 1 won " << endl;
-				GameOver = true;
+				
 			}
 			else if (topLeft || topMid || topRight == 11)
 			{
 				cout << "\t" << " Player 2 won " << endl;
-				GameOver = true;
+				
 			}
-			
+			GameOver = true;
 		}
 		else if (midLeft == midMid && midMid == midRight)
 		{
 			if (midLeft || midMid || midRight == 0)
 			{
 				cout << "\t" << " Player 1 won " << endl;
-				GameOver = true;
+				
 			}
 			else if (midLeft || midMid || midRight == 11)
 			{
 				cout << "\t" << " Player 2 won " << endl;
-				GameOver = true;
+				
 			}
-			
+			GameOver = true;
 		}
 		else if (botLeft == botMid && botMid == botRight)
 		{
 			if (botLeft || botMid || botRight == 0)
 			{
 				cout << "\t" << " Player 1 won " << endl;
-				GameOver = true;
+				
 			}
 			else if (botLeft || botMid || botRight == 11)
 			{
 				cout << "\t" << " Player 2 won " << endl;
-				GameOver = true;
+				
 			}
+			GameOver = true;
 		}
 		else if (topLeft == midMid && midMid == botRight)
 		{
 			if (topLeft || midMid || botRight == 0)
 			{
 				cout << "\t" << " Player 1 won " << endl;
-				GameOver = true;
+				
 			}
 			else if (topLeft || midMid || botRight == 11)
 			{
 				cout << "\t" << " Player 2 won " << endl;
-				GameOver = true;
+				
 			}
-			
+			GameOver = true;
 		}
 		else if (topRight == midMid && midMid == botLeft)
 		{
 			if (topRight || midMid || botLeft == 0)
 			{
 				cout << "\t" << " Player 1 won " << endl;
-				GameOver = true;
+				
 			}
 			else if (topRight || midMid || botLeft == 11)
 			{
 				cout << "\t" << " Player 2 won " << endl;
-				GameOver = true;
+				
 			}
+			GameOver = true;
 		}
 		
+		return true;
 	}
 	
 	void drawCondition()
