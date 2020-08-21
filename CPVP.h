@@ -1,12 +1,15 @@
 #pragma once
 #include <iostream>
+
 using namespace std;
 
 
 class PVP
 {
 public:
-
+	//simple yet hardcoded
+	
+	// declaring slots to store the input and mark
 	int topLeft = 7;
 	int topMid = 8;
 	int topRight = 9;
@@ -17,22 +20,23 @@ public:
 	int botMid = 2;
 	int botRight = 3;
 
-
+	// pariables to store player names
 	string player1 = " ";
 	string player2 = " ";
 
 	char Quit = ' ';
-	char markX = 'X';
+	char markX = 'X'; 
 	char markY = 'y';
 	
 
-	int mat[3][3] = { {topLeft, topMid, topRight} , {midLeft,midMid, midRight} , {botLeft, botMid , botRight} };
+	
 
-	int playerOneInput;
-	int playerTwoInput;
-	int userInput;
-	bool GameOver = false;
-	bool gameIsRunning = true;
+	int playerOneInput;// for player one input
+	int playerTwoInput; //for player two input
+	int userInput; // for general input
+
+	bool GameOver = false; //main loop
+	bool gameIsRunning = true; //secondary loop
 
 
 	bool playPvP()
@@ -55,7 +59,7 @@ public:
 			cout << endl;
 			cout << endl;
 
-			cin >> player1;
+			cin >> player1; //taking name of 1st player
 
 			cout << endl;
 			cout << endl;
@@ -64,18 +68,20 @@ public:
 			cout << endl;
 			cout << endl;
 			
-			cin >> player2;
+			cin >> player2; // taking name of 2nd player
+
+			system("cls");
 
 			cout << endl;
 			cout << endl;
 			cout << " Welcome " << player1 << " and " << player2 << endl ;
 			cout << endl;
-			cout << " Enter 1 to start Playing " << endl;
-			cout << " Enter 0 to quit ";
+			cout << " Enter 1 to start Playing " << endl << endl;
+			cout << " Enter 0 to quit " << endl << endl;
 
 			
 		
-			cin >> userInput;
+			cin >> userInput; 
 			
 			
 			while (gameIsRunning != false)
@@ -89,12 +95,20 @@ public:
 				}
 				else
 				{
-					PlayerOnePlay();
-					winCondition();
+					if (gameIsRunning)
+					{
+						PlayerOnePlay(); // function for player one moves
+						winCondition();// function to check win
+						drawCondition(); //nction to check loss 
 
-
-					PlayerTwoPlay();
-					winCondition();
+						PlayerTwoPlay();// function for player two moves
+						winCondition();
+						drawCondition();
+					}
+					else
+					{
+						gameIsRunning = false;
+					}
 				}
 			}
 			return 0;
@@ -103,7 +117,7 @@ public:
 		return true;
 	}
 	
-	void displayBoard()
+	void displayBoard() // to print the game board to the screen
 	{
 		cout << "\t" << "  " << topLeft << "  " << "|" << "  " << topMid << "  " << "|" << "  " << topRight << "  " << endl;
 		cout << "\t" << " -- " << " | " << " -- " << "| " << " -- " << endl;
@@ -121,7 +135,7 @@ public:
 		cout << endl;
 		cout << endl;
 
-		displayBoard();
+		displayBoard(); // to display board brfore player one's  input
 
 		cout << endl;
 		cout << endl;
@@ -133,47 +147,51 @@ public:
 		cin >> playerOneInput;
 
 		
-		 if (playerOneInput == topLeft && topLeft != 11 || 0)
+		if (playerOneInput == 0)
+		{
+			GameOver = true;
+		}
+		 if (playerOneInput == topLeft && topLeft != 11 || 0) // to mark topleft box
 		{
 			topLeft = 0;
 			displayBoard();
 		}
-		else if (playerOneInput == topRight && topRight != 11 || 0)
+		else if (playerOneInput == topRight && topRight != 11 || 0) //to mark top right box
 		{
 			topRight = 0;
 			displayBoard();
 		}
-		else if (playerOneInput == topMid && topMid != 11 || 0)
+		else if (playerOneInput == topMid && topMid != 11 || 0) //to mark top middle box
 		{
 			topMid = 0;
 			displayBoard();
 		}
-		else if (playerOneInput == midLeft && midLeft != 11 || 0)
+		else if (playerOneInput == midLeft && midLeft != 11 || 0) // to mark middle left box
 		{
 			midLeft = 0;
 			displayBoard();
 		}
-		else if (playerOneInput == midMid && midMid != 11 || 0)
+		else if (playerOneInput == midMid && midMid != 11 || 0) // to mark center box
 		{
 			midMid = 0;
 			displayBoard();
 		}
-		else if (playerOneInput == midRight && midRight != 11 || 0)
+		else if (playerOneInput == midRight && midRight != 11 || 0) // to mark middle right box
 		{
 			midRight = 0;
 			displayBoard();
 		}
-		else if (playerOneInput == botLeft && botLeft != 11 || 0)
+		else if (playerOneInput == botLeft && botLeft != 11 || 0) //to mark bottom left box
 		{
 			botLeft = 0;
 			displayBoard();
 		}
-		else if (playerOneInput == botRight && botRight != 11 || 0)
+		else if (playerOneInput == botRight && botRight != 11 || 0) // to mark bottom right box
 		{
 			botRight = 0;
 			displayBoard();
 		}
-		else if (playerOneInput == botMid && botMid != 11 || 0)
+		else if (playerOneInput == botMid && botMid != 11 || 0) // to mark bottom right box
 		{
 		botMid = 0;
 		displayBoard();
@@ -187,45 +205,53 @@ public:
 
 
 			cin >> playerOneInput;
-
+			// to loop if the input number is not available
 			
-		 
-			if (playerOneInput == topRight && topRight != 11 || 0)
+			if (playerOneInput == 0) 
+			{
+				GameOver = true;
+			 }
+			if (playerOneInput == topLeft && topLeft != 11 || 0) // top left box
+			{
+				topLeft = 0;
+				displayBoard();
+			}
+			else if (playerOneInput == topRight && topRight != 11 || 0) //top right box
 			{
 				topRight = 0;
 				displayBoard();
 			}
-			else if (playerOneInput == topMid && topMid != 11 || 0)
+			else if (playerOneInput == topMid && topMid != 11 || 0) // top middle box
 			{
 			topMid = 0;
 			displayBoard();
 			}
-			else if (playerOneInput == midLeft && midLeft != 11 || 0)
+			else if (playerOneInput == midLeft && midLeft != 11 || 0) // middle left box
 			{
 				midLeft = 0;
 				displayBoard();
 			}
-			else if (playerOneInput == midMid && midMid != 11 || 0)
+			else if (playerOneInput == midMid && midMid != 11 || 0) // center box
 			{
 				midMid = 0;
 				displayBoard();
 			}
-			else if (playerOneInput == midRight && midRight != 11 || 0)
+			else if (playerOneInput == midRight && midRight != 11 || 0) // middle right box
 			{
 				midRight = 0;
 			displayBoard();
 			}
-			else if (playerOneInput == botLeft && botLeft != 11 || 0)
+			else if (playerOneInput == botLeft && botLeft != 11 || 0) // bottom left box
 			{
 				botLeft = 0;
 				displayBoard();
 			}
-			else if (playerOneInput == botRight && botRight != 11 || 0)
+			else if (playerOneInput == botRight && botRight != 11 || 0) //bottom right box
 			{
 				botRight = 0;
 				displayBoard();
 			}
-			else if (playerOneInput == botMid && botMid != 11 || 0)
+			else if (playerOneInput == botMid && botMid != 11 || 0) // bottom middle box
 			{
 				botMid = 0;
 				displayBoard();
@@ -243,9 +269,10 @@ public:
 		}
 
 		winCondition();
+		drawCondition();
 	}
 
-	void PlayerTwoPlay()
+	void PlayerTwoPlay() // player two play function
 	{
 		system("cls");
 
@@ -265,7 +292,7 @@ public:
 
 		cin >> playerTwoInput;
 		
-		if (playerTwoInput == 0)
+		if (playerTwoInput == 0) // to quit
 		{
 			cout << " Game Over";
 			GameOver = true;
@@ -324,7 +351,11 @@ public:
 			cin >> playerTwoInput;
 			
 			
-			
+			if (playerTwoInput == 0)
+			{
+				cout << " Game Over";
+				GameOver = true;
+			}
 			if (playerTwoInput == topLeft && topLeft != 11 || 0)
 			{
 				topLeft = 11;
@@ -379,7 +410,7 @@ public:
 
 		
 		winCondition();
-		
+		drawCondition();
 
 		
 
@@ -388,208 +419,220 @@ public:
 
 	void winCondition()
 	{
-	
-		if (topLeft == midLeft && midLeft == botLeft)
+		if (gameIsRunning)
 		{
-			if (topLeft || midLeft || botLeft == 0)
+			if (topLeft == midLeft && midLeft == botLeft) // left column
 			{
-				cout << "\t" << " Player 1 won " << endl;
-				//gameIsRunning = false;
-			}
-			else if( topLeft || midLeft || botLeft == 11)
-			{
-				cout << "\t" << " Player 2 won " << endl;
-				//gameIsRunning = false;
-			}
-			cout << endl;
-			cout << "\t" << " enter 0 to continue ";
+				if (topLeft || midLeft || botLeft == 0)
+				{
+					cout << "\t" << player1  << "  won " << endl;
+					//gameIsRunning = false;
+				}
+				else if (topLeft || midLeft || botLeft == 11)
+				{
+					cout << "\t" << player2<< "  won " << endl;
+					//gameIsRunning = false;
+				}
+				cout << endl;
+				cout << "\t" << " enter 0 to continue ";
 
+
+
+				cin >> userInput;
+				if (userInput == 0)
+				{
+					gameIsRunning = false;
+				}
+			}
+			else if (topMid == midMid && midMid == botMid) // middle column
+			{
+				if (topMid || midMid || botMid == 0)
+				{
+					cout << "\t" << player1 << "  won " << endl;
+					//gameIsRunning = false;
+				}
+				else if (topMid || midMid || botMid == 11)
+				{
+					cout << "\t" << player2 << "  won " << endl;
+					//gameIsRunning = false;
+				}
+				cout << endl;
+				cout << "\t" << " enter 0 to continue ";
+
+
+
+				cin >> userInput;
+				if (userInput == 0)
+				{
+					gameIsRunning = false;
+				}
+			}
+			else if (topRight == midRight && midRight == botRight) // right column
+			{
+				if (topRight || midRight || botRight == 0)
+				{
+					cout << "\t" << player1 << "  won " << endl;
+					//gameIsRunning = false;
+				}
+				else if (topRight || midRight || botRight == 11)
+				{
+					cout << "\t" << player2 << "  won " << endl;
+					//gameIsRunning = false;
+				}
+				cout << endl;
+				cout << "\t" << " enter 0 to continue ";
+
+
+
+				cin >> userInput;
+				if (userInput == 0)
+				{
+					gameIsRunning = false;
+				}
+			}
+			else if (topLeft == topMid && topMid == topRight) // top row
+			{
+				if (topLeft || topMid || topRight == 0)
+				{
+					cout << "\t" << player1 << "  won " << endl;
+					//gameIsRunning = false;
+				}
+				else if (topLeft || topMid || topRight == 11)
+				{
+					cout << "\t" << player2 << "  won " << endl;
+					//gameIsRunning = false;
+				}
+				cout << endl;
+				cout << "\t" << " enter 0 to continue ";
+
+
+
+				cin >> userInput;
+				if (userInput == 0)
+				{
+					gameIsRunning = false;
+				}
+			}
+			else if (midLeft == midMid && midMid == midRight) // middle row
+			{
+				if (midLeft || midMid || midRight == 0)
+				{
+					cout << "\t" << player1 << "  won " << endl;
+					//gameIsRunning = false;
+				}
+				else if (midLeft || midMid || midRight == 11)
+				{
+					cout << "\t" << player2 << "  won " << endl;
+					//gameIsRunning = false;
+				}
+				cout << endl;
+				cout << "\t" << " enter 0 to continue ";
+
+
+
+				cin >> userInput;
+				if (userInput == 0)
+				{
+					gameIsRunning = false;
+				}
+			}
+			else if (botLeft == botMid && botMid == botRight) //bottom row
+			{
+				if (botLeft || botMid || botRight == 0)
+				{
+					cout << "\t" << player1 << "  won " << endl;
+					//gameIsRunning = false;
+				}
+				else if (botLeft || botMid || botRight == 11)
+				{
+					cout << "\t" << player2 << "  won " << endl;
+					//gameIsRunning = false;
+				}
+				cout << endl;
+				cout << "\t" << " enter 0 to continue ";
+
+
+
+				cin >> userInput;
+				if (userInput == 0)
+				{
+					gameIsRunning = false;
+				}
+			}
+			else if (topLeft == midMid && midMid == botRight) //across top left box to bottom right
+			{
+				if (topLeft || midMid || botRight == 0)
+				{
+					cout << "\t" << player1 << "  won " << endl;
+					//gameIsRunning = false;
+				}
+				else if (topLeft || midMid || botRight == 11)
+				{
+					cout << "\t" << player2 << "  won " << endl;
+					//gameIsRunning = false;
+				}
+				cout << endl;
+				cout << "\t" << " enter 0 twice to continue ";
+
+
+
+				cin >> userInput;
+
+				if (userInput == 0)
+				{
+					gameIsRunning = false;
+				}
+			}
+			else if (topRight == midMid && midMid == botLeft) //across top roght to bottom left
+			{
+				if (topRight || midMid || botLeft == 0)
+				{
+					cout << "\t" << player1 << "  won " << endl;
+					//gameIsRunning = false;
+				}
+				else if (topRight || midMid || botLeft == 11)
+				{
+					cout << "\t" << player2 << "  won " << endl;
+					//gameIsRunning = false;
+				}
+				
+				
+				cout << endl;
+				cout << "\t" << " enter 0 twice to continue ";
+
+
+
+				cin >> userInput;
+				
+			}
 			
-
-			cin >> userInput;
 			if (userInput == 0)
 			{
 				gameIsRunning = false;
 			}
 		}
-		else if (topMid == midMid && midMid == botMid)
-		{
-			if (topMid || midMid || botMid == 0)
-			{
-				cout << "\t" << " Player 1 won " << endl;
-				//gameIsRunning = false;
-			}
-			else if (topMid || midMid || botMid == 11)
-			{
-				cout << "\t" << " Player 2 won " << endl;
-				//gameIsRunning = false;
-			}
-			cout << endl;
-			cout << "\t" << " enter 0 to continue ";
-
-			
-
-			cin >> userInput;
-			if (userInput == 0)
-			{
-				gameIsRunning = false;
-			}
-		}
-		else if (topRight == midRight && midRight == botRight)
-		{
-			if (topRight || midRight || botRight == 0)
-			{
-				cout << "\t" << " Player 1 won " << endl;
-				//gameIsRunning = false;
-			}
-			else if (topRight || midRight || botRight == 11)
-			{
-				cout << "\t" << " Player 2 won " << endl;
-				//gameIsRunning = false;
-			}
-			cout << endl;
-			cout << "\t" << " enter 0 to continue ";
-
-			
-
-			cin >> userInput;
-			if (userInput == 0)
-			{
-				gameIsRunning = false;
-			}
-		}
-		else if (topLeft == topMid && topMid == topRight)
-		{
-			if (topLeft || topMid || topRight == 0)
-			{
-				cout << "\t" << " Player 1 won " << endl;
-				//gameIsRunning = false;
-			}
-			else if (topLeft || topMid || topRight == 11)
-			{
-				cout << "\t" << " Player 2 won " << endl;
-				//gameIsRunning = false;
-			}
-			cout << endl;
-			cout << "\t" << " enter 0 to continue ";
-
-			
-
-			cin >> userInput;
-			if (userInput == 0)
-			{
-				gameIsRunning = false;
-			}
-		}
-		else if (midLeft == midMid && midMid == midRight)
-		{
-			if (midLeft || midMid || midRight == 0)
-			{
-				cout << "\t" << " Player 1 won " << endl;
-				//gameIsRunning = false;
-			}
-			else if (midLeft || midMid || midRight == 11)
-			{
-				cout << "\t" << " Player 2 won " << endl;
-				//gameIsRunning = false;
-			}
-			cout << endl;
-			cout << "\t" << " enter 0 to continue ";
-
-			
-
-			cin >> userInput;
-			if (userInput == 0)
-			{
-				gameIsRunning = false;
-			}
-		}
-		else if (botLeft == botMid && botMid == botRight)
-		{
-			if (botLeft || botMid || botRight == 0)
-			{
-				cout << "\t" << " Player 1 won " << endl;
-				//gameIsRunning = false;
-			}
-			else if (botLeft || botMid || botRight == 11)
-			{
-				cout << "\t" << " Player 2 won " << endl;
-				//gameIsRunning = false;
-			}
-			cout << endl;
-			cout << "\t" << " enter 0 to continue ";
-
-		
-
-			cin >> userInput;
-			if (userInput == 0)
-			{
-				gameIsRunning = false;
-			}
-		}
-		else if (topLeft == midMid && midMid == botRight)
-		{
-			if (topLeft || midMid || botRight == 0)
-			{
-				cout << "\t" << " Player 1 won " << endl;
-				//gameIsRunning = false;
-			}
-			else if (topLeft || midMid || botRight == 11)
-			{
-				cout << "\t" << " Player 2 won " << endl;
-				//gameIsRunning = false;
-			}
-			cout << endl;
-			cout << "\t" << " enter 0 to continue ";
-
-			
-
-			cin >> userInput;
-
-			if (userInput == 0)
-			{
-				gameIsRunning = false;
-			}
-		}
-		else if (topRight == midMid && midMid == botLeft)
-		{
-			if (topRight || midMid || botLeft == 0)
-			{
-				cout << "\t" << " Player 1 won " << endl;
-				//gameIsRunning = false;
-			}
-			else if (topRight || midMid || botLeft == 11)
-			{
-				cout << "\t" << " Player 2 won " << endl;
-				//gameIsRunning = false;
-			}
-			cout << endl;
-			cout << "\t" << " enter 0 to continue ";
-
-			
-
-			cin >> userInput;
-			if (userInput == 0)
-			{
-				gameIsRunning = false;
-			}
-		}
-		
-		
 
 		
 	}
 	
 	void drawCondition()
 	{
-		/*if ((GameOver != true) && (topLeft == 0 || 11) && (topMid == 0 || 11) && (topRight == 0 || 11) &&  
-			(midLeft == 0 || 11) && (midMid == 0 || 11) && (midRight == 0 || 11) &&
-			(botLeft == 0 || 11) && (botMid == 0 || 11) && (botRight == 0 || 11))
+		if ((GameOver != true) && (topLeft != 7) && (topMid != 8) && (topRight != 9) &&  
+			(midLeft != 4) && (midMid != 5) && (midRight !=6 ) &&			// checking if all the slots have been marked
+			(botLeft != 1) && (botMid != 2) && (botRight !=3))            // if all slots are taken and game is still rinnung
 		{
-			cout << "\t" << " Game is Draw " << endl;
-			GameOver = true;
+			cout << endl << endl;
+			cout << "\t" << " Game is Draw " << endl << endl ;
 
-		}*/
+			cout << "\t" << " Enter 0 to continue "; \
+			
+			cin >> userInput;
+
+			if (userInput == 0)
+			{
+				gameIsRunning = false;
+			}
+		}
 	}
 };
 

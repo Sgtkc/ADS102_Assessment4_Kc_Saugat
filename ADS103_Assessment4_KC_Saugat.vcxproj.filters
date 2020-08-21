@@ -23,5 +23,8 @@
     <ClInclude Include="CPVP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PVC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

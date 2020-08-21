@@ -8,6 +8,7 @@
 #include <ctime>
 #include <time.h>
 #include "CPVP.h"
+#include "PVC.h"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ void playOptions()
 {
 	system("cls");
 	PVP p;
+	PVC pc;
 
 	int PvP = 1;
 	int PvC = 2;
@@ -30,7 +32,7 @@ void playOptions()
 	cout << endl;
 	cout << "\t" << "  PLAYER Vs PLAYER   (1)" << endl;
 	cout << "\t" << " PLAYER Vs COMPUTER  (2)" << endl;
-	cout << "\t" << "COMPUTER Vs COMPUTER (3)" << endl;
+	
 
 	cin >> playerInput;
 
@@ -41,13 +43,10 @@ void playOptions()
 
 	if (playerInput == PvC)
 	{
-
+		pc.playPvC();
 	}
 
-	if (playerInput == CvC)
-	{
-
-	}
+	
 
 }
 
@@ -60,6 +59,8 @@ int main()
 	int credits = 3;
 	int computerWins = 0;
 	int playerChoice = 0;
+
+	int ComputerWins = 0;;
 
 	bool isGameRunning = true;
 
@@ -104,7 +105,9 @@ int main()
 
 		if (playerChoice == credits)
 		{
-
+			cout << "\t" << "  Developers : " << endl;
+			cout << "\t" << "  Saugat K C " << endl;
+			cout << "\t" << " Sharad Baidhya " << endl;
 
 		}
 
